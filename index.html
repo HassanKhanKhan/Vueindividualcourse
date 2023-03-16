@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
-    <script src="subjects.js"></script>
     <link rel="stylesheet" href="stylesheet.css">
+    <script src="subjects.js"></script>
     <!-- <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> -->
     <title>Web Academy</title>
 </head>
@@ -17,7 +17,7 @@
         <header class="display-flex-row">
             <h1>{{sitename}}</h1>
             <div v-if="can_showSubjects">
-                <button v-if="canRemoveFromCart" v-on:click="checkout">
+                <button v-if="canRemoveFromCart" v-bind="checkout">
                     {{cartItemCount}}
                     <i class="bx bx-cart"></i>
                     Checkout
@@ -28,7 +28,7 @@
                 </button>
             </div>
             <div v-else>
-                <button v-on:click="checkout">
+                <button v-bind="checkout">
                     <i class='bx bx-left-arrow-alt'></i>
                     Go back
                 </button>
@@ -42,29 +42,29 @@
                         <h3>Sort By</h3>
                         <div id="sort_by">
                             <div class="radio_container">
-                                <input name="sort_radio" type="radio" v-on:click="changeCriteria('lesson')" checked>
+                                <input name="sort_radio" type="radio" v-bind="changeCriteria('lesson')" checked>
                                 <label for="sort_radio">Subject</label>
                             </div>
                             <div class="radio_container">
-                                <input name="sort_radio" type="radio" v-on:click="changeCriteria('location')">
+                                <input name="sort_radio" type="radio" v-bind="changeCriteria('location')">
                                 <label for="sort_radio">Location</label>
                             </div>
                             <div class="radio_container">
-                                <input name="sort_radio" type="radio" v-on:click="changeCriteria('price')">
+                                <input name="sort_radio" type="radio" v-bind="changeCriteria('price')">
                                 <label for="sort_radio">Price</label>
                             </div>
                             <div class="radio_container">
-                                <input name="sort_radio" type="radio" v-on:click="changeCriteria('availability')">
+                                <input name="sort_radio" type="radio" v-bind="changeCriteria('availability')">
                                 <label for="sort_radio">Availability</label>
                             </div>
                         </div>
                         <div id="order_by">
                             <div class="radio_container">
-                                <input name="order_radio" type="radio" v-on:click="changeOrder('ascending')" checked>
+                                <input name="order_radio" type="radio" v-bind="changeOrder('ascending')" checked>
                                 <label for="order_radio">Ascending</label>
                             </div>
                             <div class="radio_container">
-                                <input name="order_radio" v-on:click="changeOrder('descending')" type="radio">
+                                <input name="order_radio" v-bind="changeOrder('descending')" type="radio">
                                 <label for="order_radio">Descending</label>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                                         <img class="image" v-bind:src="subject.image">
                                     </figure>
                                 </div>
-                                <button v-if="subject.spaces > 0" v-on:click="addToCart(subject)">Add To Cart</button>
+                                <button v-if="subject.spaces > 0" v-bind="addToCart(subject)">Add To Cart</button>
                                 <button v-else disabled>Add To Cart</button>
                             </div>
                         </div>
@@ -125,7 +125,7 @@
                                         <img class="image" v-bind:src="subject.item.image">
                                     </figure>
                                 </div>
-                                <button v-on:click="removeFromCart(subject.item)">Remove From Cart</button>
+                                <button v-bind="removeFromCart(subject.item)">Remove From Cart</button>
                             </div>
                         </div>
                     </div>
