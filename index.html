@@ -17,7 +17,7 @@
         <header class="display-flex-row">
             <h1>{{sitename}}</h1>
             <div v-if="can_showSubjects">
-                <button v-if="canRemoveFromCart" v-bind="checkout">
+                <button v-if="canRemoveFromCart" v-on:click="checkout">
                     {{cartItemCount}}
                     <i class="bx bx-cart"></i>
                     Checkout
@@ -28,7 +28,7 @@
                 </button>
             </div>
             <div v-else>
-                <button v-bind="checkout">
+                <button v-on:click="checkout">
                     <i class='bx bx-left-arrow-alt'></i>
                     Go back
                 </button>
@@ -42,29 +42,29 @@
                         <h3>Sort By</h3>
                         <div id="sort_by">
                             <div class="radio_container">
-                                <input name="sort_radio" type="radio" v-bind="changeCriteria('lesson')" checked>
+                                <input name="sort_radio" type="radio" v-on:click="changeCriteria('lesson')">
                                 <label for="sort_radio">Subject</label>
                             </div>
                             <div class="radio_container">
-                                <input name="sort_radio" type="radio" v-bind="changeCriteria('location')">
+                                <input name="sort_radio" type="radio" v-on:click="changeCriteria('location')">
                                 <label for="sort_radio">Location</label>
                             </div>
                             <div class="radio_container">
-                                <input name="sort_radio" type="radio" v-bind="changeCriteria('price')">
+                                <input name="sort_radio" type="radio" v-on:click="changeCriteria('price')">
                                 <label for="sort_radio">Price</label>
                             </div>
                             <div class="radio_container">
-                                <input name="sort_radio" type="radio" v-bind="changeCriteria('availability')">
+                                <input name="sort_radio" type="radio" v-on:click="changeCriteria('availability')">
                                 <label for="sort_radio">Availability</label>
                             </div>
                         </div>
                         <div id="order_by">
                             <div class="radio_container">
-                                <input name="order_radio" type="radio" v-bind="changeOrder('ascending')" checked>
+                                <input name="order_radio" type="radio" v-on:click="changeOrder('ascending')">
                                 <label for="order_radio">Ascending</label>
                             </div>
                             <div class="radio_container">
-                                <input name="order_radio" v-bind="changeOrder('descending')" type="radio">
+                                <input name="order_radio" v-on:click="changeOrder('descending')" type="radio">
                                 <label for="order_radio">Descending</label>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                                         <img class="image" v-bind:src="subject.image">
                                     </figure>
                                 </div>
-                                <button v-if="subject.spaces > 0" v-bind="addToCart(subject)">Add To Cart</button>
+                                <button v-if="subject.spaces > 0" v-on:click="addToCart(subject)">Add To Cart</button>
                                 <button v-else disabled>Add To Cart</button>
                             </div>
                         </div>
@@ -117,15 +117,15 @@
                             <div class="subject" v-for="subject in cart">
                                 <div style="width: 100%; display: inline-flex; align-items: center;">
                                     <div class="info_container">
-                                        <p>Subject: {{subject.item.lesson}}</p>
-                                        <p>Location: {{subject.item.location}}</p>
-                                        <p>Price: £{{subject.item.price}}</p>
+                                        <p>Subject: {{subject.lesson}}</p>
+                                        <p>Location: {{subject.location}}</p>
+                                        <p>Price: £{{subject.price}}</p>
                                     </div>
                                     <figure>
-                                        <img class="image" v-bind:src="subject.item.image">
+                                        <img class="image" v-bind:src="subject.image">
                                     </figure>
                                 </div>
-                                <button v-bind="removeFromCart(subject.item)">Remove From Cart</button>
+                                <button v-on:click="removeFromCart(subject)">Remove From Cart</button>
                             </div>
                         </div>
                     </div>
@@ -144,35 +144,89 @@
             order: "ascending",
             searchInput: "",
             showSubjects: true,
-            subjects: [...subjects],
+            x: [...subjects],
             userData: {
                 name: "",
                 phone: "",
             },
-            subject: subject,
+            subjects: [{
+
+                lesson: "Car",
+                location: 'Location Test 1',
+                price: "Price Test 1",
+                spaces: 6,
+                image: "img/FlyDubai.png"
+            }, {
+                lesson: "cat",
+                location: 'Location Test 2',
+                price: "Price Test 2",
+                spaces: 9,
+                image: "img/FlyDubai.png"
+            }, {
+                lesson: "dog",
+                location: 'Location Test 3',
+                price: "Price Test 3",
+                spaces: 8,
+                image: "img/FlyDubai.png"
+            }, {
+                lesson: "Lesson Test 4",
+                location: 'Location Test 4',
+                price: "Price Test 4",
+                spaces: 0,
+                image: "img/FlyDubai.png"
+            }, {
+                lesson: "Lesson Test 5",
+                location: 'Location Test 5',
+                price: "Price Test 5",
+                spaces: 19,
+                image: "img/FlyDubai.png"
+            }, {
+                lesson: "Lesson Test 6",
+                location: 'Location Test 6',
+                price: "Price Test 6",
+                spaces: 6,
+                image: "img/FlyDubai.png"
+            }, {
+                lesson: "Lesson Test 7",
+                location: 'Location Test 7',
+                price: "Price Test 7",
+                spaces: 3,
+                image: "img/FlyDubai.png"
+            }, {
+                lesson: "Lesson Test 8",
+                location: 'Location Test 8',
+                price: "Price Test 8",
+                spaces: 14,
+                image: "img/FlyDubai.png"
+            }, {
+                lesson: "Lesson Test 9",
+                location: 'Location Test 9',
+                price: "Price Test 9",
+                spaces: 1,
+                image: "img/FlyDubai.png"
+
+            }, {
+                lesson: "Lesson Test 10",
+                location: 'Location Test 10',
+                price: "Price Test 10",
+                spaces: 0,
+                image: "img/FlyDubai.png"
+
+            }, ],
+            subject: this.subject,
             cart: [],
 
         },
         methods: {
             addToCart(subject) {
-                if (subject.spaces > 0) {
-                    subject.spaces--
-                        const data = {
-                            "cart_id": `${subject.lesson[0]}` + `-${subject.location[0]}-` + Math.ceil(Math.random() * 10000),
-                            "item": subject
-                        }
-                    this.cart.push(data)
-                }
+                subject.spaces--
+                    this.cart.push(subject)
             },
             removeFromCart(cart_item) {
                 cart_item.spaces++
-                    for (let i = 0; i < this.cart.length; i++) {
-                        const item = this.cart[i]
-                        if (cart_item.id == item.id) {
-                            this.cart.splice(i, 1)
-                            break;
-                        }
-                    }
+
+                    this.cart.splice(cart_item, 1)
+
             },
             checkout() {
                 this.showSubjects = this.showSubjects ? false : true
@@ -211,9 +265,11 @@
                 }
             },
             filterItems() {
+
                 const exclude = ["all", "availability", "price"]
+                    // const exclude =   { lesson: "asfaf", location: 'asfsfg', price: "asfas", spaces: 8 }
                 if (!exclude.includes(this.criteria)) {
-                    return this.subjects.filter(x => x[this.criteria].toLowerCase().includes(this.searchInput)).sort((a, b) => {
+                    return this.subjects.filter(x => x[this.criteria].toLowerCase().includes(this.searchInput.toLowerCase())).sort((a, b) => {
                         switch (this.order) {
                             case "ascending":
                                 if (a[this.criteria] > b[this.criteria]) {
@@ -240,7 +296,7 @@
                     return this.subjects.filter(x => x["spaces"] > 0)
                 }
                 if (this.criteria == "price") {
-                    return this.subjects.filter(x => (x["price"] + "").includes(this.searchInput)).sort((a, b) => {
+                    return this.subjects.filter(x => (x["price"] + "").includes(this.searchInput.toLowerCase())).sort((a, b) => {
                         switch (this.order) {
                             case "ascending":
                                 if (a[this.criteria] > b[this.criteria]) {
