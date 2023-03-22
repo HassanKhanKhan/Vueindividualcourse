@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div class="col-9 mt-5 p-3 bg-light">
-                        <div id="subjects_container" class="display-flex-col width-height">
+                        <div class="display-flex-col width-height">
                             <!-------------- -------------------Search Bar --------------------------------->
                             <input v-model.trim="searchInput" type="search" class="form-control border border-2 border-primary" />
                             <label class="form-label" for="form1" style="font-size: 20px;">Search</label>
@@ -137,13 +137,13 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" pattern="[A-Za-z]" id="inputGroup-sizing-sm">Phone:</span>
                                 </div>
-                                <input type="text" class="form-control" v-model.trim="userData.phone">
+                                <input type="number" class="form-control" v-model.trim="userData.phone">
                             </div>
                             <button class="btn buttonsuccess text-white" v-on:click="showAlert" v-if="canCheckout">Checkout</button>
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <div id="subjects_container border" class="display-flex-col width-height">
+                        <div class="display-flex-col width-height">
                             <div id="subjects">
                                 <div class="subject border p-3" v-for="subject in cart">
                                     <div style="width: 100%; display: inline-flex; align-items: center;">
@@ -220,6 +220,7 @@
             canRemoveFromCart() {
                 return this.cart.length > 0
             },
+            ////// // Validation Check Out Button////////////////////
             canCheckout() {
                 const letters = /^[A-Za-z]+$/;
                 const numbers = /^[0-9]+$/;
