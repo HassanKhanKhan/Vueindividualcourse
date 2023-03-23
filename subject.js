@@ -32,7 +32,7 @@ let subjects = [{
         location: 'Ski Dubai',
         price: "2000",
         spaces: 5,
-        image: "img/futsall.jpg"
+        image: "img/futsall.png"
     },
     {
         lesson: "Arabic",

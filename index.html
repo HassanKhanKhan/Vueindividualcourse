@@ -92,7 +92,7 @@
                             <div id="subjects" class="card p-4">
                                 <div class="subject border border-3 mt-2" v-for="subject in filterItems">
                                     <figure>
-                                        <img class="image" style="margin-left: 100px;" v-bind:src="subject.image">
+                                        <img class="image" v-bind:src="subject.image">
                                     </figure>
                                     <div class="card-body bg-Light">
                                         <div class="info_container">
@@ -138,28 +138,33 @@
                                 </div>
                                 <input type="number" class="form-control" v-model.trim="userData.phone">
                             </div>
-                            <button class="btn buttonsuccess text-white" v-on:click="showAlert" v-if="canCheckout">Checkout</button>
+                            <a href="index.html"> <button class="btn buttonsuccess text-white" v-on:click="showAlert" v-if="canCheckout">Checkout</button></a>
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <div class="display-flex-col width-height">
-                            <div id="subjects">
-                                <div class="subject border p-3" v-for="subject in cart">
-                                    <div style="width: 100%; display: inline-flex; align-items: center;">
-                                        <div class="info_container">
-                                            <p>Subject: {{subject.lesson}}</p>
-                                            <p>Location: {{subject.location}}</p>
-                                            <p>Price: £{{subject.price}}</p>
-                                        </div>
-                                        <figure>
-                                            <img class="image" v-bind:src="subject.image">
-                                        </figure>
+                        <div id="subjects" class="card p-4">
+                            <div class="subject border border-3 mt-2" v-for="subject in cart">
+                                <figure>
+                                    <img class="image" v-bind:src="subject.image">
+                                </figure>
+                                <div class="card-body bg-Light">
+                                    <div class="info_container">
+                                        <p class="card-text">Subject: {{subject.lesson}}</p>
+                                        <p class="card-text">Location: Dubai,{{subject.location}}</p>
+                                        <p class="card-text">Price: AED {{subject.price}}</p>
+                                        <p class="card-text">Spaces: {{subject.spaces}}</p>
                                     </div>
                                     <button class="btn btn-dark" v-on:click="removeFromCart(subject)">Remove From Cart</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!--
+
+                     -->
+
+
+                    <!--  -->
                 </div>
             </div>
         </main>
