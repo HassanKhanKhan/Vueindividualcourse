@@ -14,6 +14,7 @@
 </head>
 
 <body>
+    <!------------------ Mounting Dom Element------------------>
     <div id="app">
         <!-- --------------Header Top-------------------------- -->
         <div class="container-fluid bgchange">
@@ -42,12 +43,14 @@
                 </div>
             </div>
         </div>
+
         <!-------------------------Header End--------------------- -->
         <main class="display-flex-col width-height">
             <!-- <div class="container-fluid"> -->
             <!-- <div class="row"> -->
             <section id="subject_page" v-if="can_showSubjects">
                 <div id="container" class="display-flex-row width-height">
+                    <!------------------ Side Bar Section Sorting --------------------------->
                     <div class="col-3 mt-5">
                         <div class="p-4 bg-light">
                             <h3 class=" border border-3 p-3 border-primary rounded" style="font-weight: bold; font-family: 'Times New Roman', Times, serif;">Sorting</h3>
@@ -81,8 +84,11 @@
                             </div>
                         </div>
                     </div>
+                    <!------------------ Side Bar Section Sorting --------------------------->
+
                     <div class="col-9 mt-5 p-3 bg-light">
                         <div class="display-flex-col width-height">
+
                             <!-------------- -------------------Search Bar --------------------------------->
                             <input v-model.trim="searchInput" type="search" class="form-control border border-2 border-primary" />
                             <label class="form-label" for="form1" style="font-size: 20px;">Search</label>
@@ -110,17 +116,13 @@
                         </div>
                     </div>
             </section>
-            <!-- </div> -->
-            <!-- </div> -->
+
             <div class="container-fluid" v-else>
                 <div class="row">
                     <div class="col-md-4 bg-light mt-5">
                         <div id="Checkout" class="border p-3">
                             <h2 class="text-primary">Checkout Section</h2>
-                            <!-- <div class="input_container">
-                                    <label for="name">Name: </label>
-                                    <input type="text" v-model.trim="userData.name">
-                                </div> -->
+
                             <div class="input-group input-group-sm mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-sm">Name:</span>
@@ -128,10 +130,6 @@
                                 <input type="text" class="form-control" v-model.trim="userData.name" aria-label="Small">
                             </div>
 
-                            <!-- <div class="input_container">
-                                    <label for="phone" pattern="[A-Za-z]">Phone: </label>
-                                    <input type="text" v-model.trim="userData.phone">
-                                </div> -->
                             <div class="input-group input-group-sm mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" pattern="[A-Za-z]" id="inputGroup-sizing-sm">Phone:</span>
@@ -141,6 +139,8 @@
                             <a href="index.html"> <button class="btn buttonsuccess text-white" v-on:click="showAlert" v-if="canCheckout">Checkout</button></a>
                         </div>
                     </div>
+
+                    <!-- Remove Cards Details Card Section Add To Cart -->
                     <div class="col-md-8">
                         <div id="subjects" class="card p-4">
                             <div class="subject border border-3 mt-2" v-for="subject in cart">
@@ -159,12 +159,8 @@
                             </div>
                         </div>
                     </div>
-                    <!--
+                    <!-- Remove Cards Details Card Section Add To Cart -->
 
-                     -->
-
-
-                    <!--  -->
                 </div>
             </div>
         </main>
@@ -180,7 +176,6 @@
             order: "ascending",
             searchInput: "",
             showSubjects: true,
-            // x: [...subjects],
             userData: {
                 name: "",
                 phone: "",
@@ -200,9 +195,7 @@
             },
             removeFromCart(cart_item) {
                 cart_item.spaces++
-
                     this.cart.splice(cart_item, 1)
-
             },
             checkout() {
                 this.showSubjects = this.showSubjects ? false : true
@@ -244,9 +237,7 @@
             ///////// VAlidation Form End///////////////////
 
             filterItems() {
-
                 const exclude = ["all", "availability", "price"]
-                    // const exclude =   { lesson: "asfaf", location: 'asfsfg', price: "asfas", spaces: 8 }
                 if (!exclude.includes(this.criteria)) {
                     return this.subjects.filter(x => x[this.criteria].toLowerCase().includes(this.searchInput.toLowerCase())).sort((a, b) => {
                         switch (this.order) {
